@@ -10,7 +10,7 @@ def task_collection():
         add_task(form.title.data,
                  form.description.data)
     tasks = models.Task.query.all()
-    return render_template('index.html',
+    return render_template('todo.html',
                            tasks = tasks,
                            form = form)
 
