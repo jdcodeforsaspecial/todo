@@ -20,6 +20,33 @@
   <body>
     <h1>Todo List</h1>
 
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+      {% for message in messages %}
+      <li>{{ message }} </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+    <form action="tasks" method="post" name="task">
+      {{ form.hidden_tag() }}
+      <div>
+        Title: {{ form.title(size=80) }}<br>
+        {% for error in form.title.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}<br>
+      </div>
+      <div>
+        Description: {{ form.description() }}
+        {% for error in form.description.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}<br>
+      </div>
+      <input type="submit" value="Add task" />
+    </form>
+
     <div class="panel-group" id="task-accordion" role="tablist" aria-multiselectable="true">
       {% for task in tasks %}
       <div class="panel panel-default">

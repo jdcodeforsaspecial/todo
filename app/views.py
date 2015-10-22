@@ -1,5 +1,6 @@
-from flask import render_template, jsonify
+from flask import render_template, flash, redirect
 from app import app
+from .forms import TaskForm
 
 tasks = [
     {
@@ -17,7 +18,12 @@ tasks = [
 ]
 
 @app.route('/')
-@app.route('/list')
+@app.route('/tasks', methods=['GET', 'POST'])
 def index():
+    form = TaskForm()
+    if form.validate_on_submit():
+        flash('Login requested for OpenID="%s", remember_me=%s' %
+              (form.title.data, str(form.description.data)))
     return render_template('index.html',
-                           tasks = tasks)
+                           tasks = tasks,
+                           form = form)
