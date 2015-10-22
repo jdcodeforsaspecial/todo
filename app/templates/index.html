@@ -20,15 +20,25 @@
   <body>
     <h1>Todo List</h1>
 
-    {% for task in tasks %}
-    <div>
-      <span>{{ task.title }}</span>
-      <div>{{ task.description }}</div>
+    <div class="panel-group" id="task-accordion" role="tablist" aria-multiselectable="true">
+      {% for task in tasks %}
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="heading{{ task.id }}">
+          <h4 class="panel-title">
+            <a role="button" data-toggle="collapse" data-parent="#task-accordion" href="#collapse{{ task.id }}" aria-expanded="false" aria-controls="collapse{{ task.id }}">
+              {{ task.title }}
+            </a>
+          </h4>
+        </div>
+        <div id="collapse{{ task.id }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{ task.id }}">
+          <div class="panel-body">{{ task.description }}</div>
+        </div>
+      </div>
+      {% endfor %}
     </div>
-    {% endfor %}
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="static/js/jquery.1.11.3.js"></script>
+    <script src="static/js/jquery-1.11.3.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="static/js/bootstrap.js"></script>
   </body>
