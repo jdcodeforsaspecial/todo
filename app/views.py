@@ -6,7 +6,7 @@ tasks = [
         'id': 1,
         'title': u'Buy groceries',
         'description': u'Milk, Cheese, Pizza, Fruit, Tylenol',
-        'done': False
+        'done': True
     },
     {
         'id': 2,
@@ -17,9 +17,7 @@ tasks = [
 ]
 
 @app.route('/')
+@app.route('/list')
 def index():
-    return render_template('index.html')
-
-@app.route('/api/v1.0/tasks', methods=['GET'])
-def get_tasks():
-    return jsonify({'tasks': tasks})
+    return render_template('index.html',
+                           tasks = tasks)
