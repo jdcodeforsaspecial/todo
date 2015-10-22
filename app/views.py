@@ -18,10 +18,7 @@ tasks = [
 
 @app.route('/')
 def index():
-    user = {'nickname': 'Miguel'}  # fake user
-    return render_template('index.html',
-                           title='Home',
-                           user=user)
+    return render_template('index.html')
 
 @app.route('/api/v1.0/tasks', methods=['GET'])
 def get_tasks():
